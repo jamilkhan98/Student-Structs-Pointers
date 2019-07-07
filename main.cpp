@@ -1,5 +1,4 @@
 //Jamil Khan
-//CECS 282 - 05
 //Prog 3 - Structures and Pointers
 //Oct 16, 2018
 
