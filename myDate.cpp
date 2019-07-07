@@ -1,6 +1,5 @@
 //Jamil Khan
 //CECS 282 - 05
-//Prog 3 - Structures and Pointers
 //Oct 16, 2018
 
 #include "myDate.h"
@@ -8,6 +7,7 @@
 #include <string>
 using namespace std;
 
+//method which calculates Gregorian Calendar Date given Julian Date
 void Julian2Greg(int JD, int & month, int  & day, int & year) {
 	int I, J, K, L, N;
 	L = JD + 68569;
@@ -25,6 +25,7 @@ void Julian2Greg(int JD, int & month, int  & day, int & year) {
 	day = K;
 }
 
+//method which calculates Julian Calendar Date from passed in month, day, and year values
 int Greg2Julian(int month, int day, int year) {
 	int I, J, K, JD;
 	I = year;
@@ -34,12 +35,14 @@ int Greg2Julian(int month, int day, int year) {
 	return JD;
 }
 
+//default constructor for myDate object
 myDate::myDate() {
 	month = 5;
 	day = 11;
 	year = 1959;
 }
 
+//overloaded constructor for myDate object passing in month, day, and year values
 myDate::myDate(int M, int D, int Y) {
 	int JD = Greg2Julian(M, D, Y);
 	int m1, d1, y1;
@@ -52,6 +55,7 @@ myDate::myDate(int M, int D, int Y) {
 	}
 }
 
+//display method for myDate objects
 void myDate::display() {
 	switch (month) {
 	case 1:
@@ -93,42 +97,50 @@ void myDate::display() {
 	}
 }
 
+//method to increase value of myDate object
 void myDate::increaseDate(int N) {
 	int JD = Greg2Julian(month, day, year);
 	JD += N;
 	Julian2Greg(JD, month, day, year);
 }
 
+//method to decrease value of myDate object
 void myDate::decreaseDate(int N) {
 	int JD = Greg2Julian(month, day, year);
 	JD -= N;
 	Julian2Greg(JD, month, day, year);
 }
 
+//method which calculates difference in days between two myDate objects
 int myDate::daysBetween(myDate D) {
 	int JD = Greg2Julian(D.getMonth(), D.getDay(), D.getYear());
 	int JD2 = Greg2Julian(month, day, year);
 	return (JD - JD2);
 }
 
+//getter method to return month value of myDate object
 int myDate::getMonth() {
 	return month;
 }
 
+//getter method to return day value of myDate object
 int myDate::getDay() {
 	return day;
 }
 
+//getter method to return year value of myDate object
 int myDate::getYear() {
 	return year;
 }
 
+//method to calculate day of year of myDate object
 int myDate::dayOfYear() {
 	int JD1 = Greg2Julian(month, day, year);
 	int JD2 = Greg2Julian(1, 1, year);
 	return (JD1 - JD2) + 1;
 }
 
+//method to display what day the myDate object corresponds to
 string myDate::dayName() {
 	int JD = Greg2Julian(month, day, year);
 	int dayNumber = JD % 7;
@@ -155,6 +167,7 @@ string myDate::dayName() {
 	}
 }
 
+//toString method to print out complete date of myDate object
 string myDate::printDate() {
 	string Month;
 	switch (month) {
